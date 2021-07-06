@@ -1,0 +1,68 @@
+<div
+    *ngIf="statistics$ | async as stats; else noData"
+    class="container"
+>
+  <h2>{{stats.response[0]?.country}} Statistics</h2>
+  <div class="d-flex justify-content-around align-items-baseline">
+    <h3>{{stats.response[0]?.continent}}</h3>
+    <h5>Population: {{stats.response[0]?.population | number}}</h5>
+  </div>
+  <div class="d-flex justify-content-between">
+    <span>
+      {{stats.response[0]?.day | date}}
+    </span>
+    <span>
+      {{stats.response[0]?.time | date: 'hh:mm a'}}
+    </span>
+  </div>
+  <div class="d-flex justify-content-around">
+    <div *ngIf="stats.response[0]?.cases as cases">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Cases
+          </mat-panel-title>
+          <mat-panel-description>
+            Total cases: {{cases.total | number}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>Active: {{cases.active | number}}</p>
+        <p>Critical: {{cases.critical | number}}</p>
+        <p>New: {{cases.new}}</p>
+        <p>Recovered: {{cases.recovered | number}}</p>
+        <p>Total: {{cases.total | number}}</p>
+      </mat-expansion-panel>
+    </div>
+    <div *ngIf="stats.response[0]?.deaths as deaths">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Deaths
+          </mat-panel-title>
+          <mat-panel-description>
+            Total deaths: {{deaths.total | number}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>New: {{deaths.new}}</p>
+        <p>Total: {{deaths.total | number}}</p>
+      </mat-expansion-panel>
+    </div>
+    <div *ngIf="stats.response[0]?.tests as tests">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Tests
+          </mat-panel-title>
+          <mat-panel-description>
+            Total tests: {{tests.total | number}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>Total: {{tests.total | number}}</p>
+      </mat-expansion-panel>
+    </div>
+  </div>
+</div>
+
+<ng-template #noData>
+  <p>Please select a country.</p>
+</ng-template>
