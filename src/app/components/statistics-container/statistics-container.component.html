@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="d-flex">
+    <div [ngStyle]="{'height' : this.windowInnerHeight + 'px', 'overflow' :'scroll'}">
+      <app-country-selector></app-country-selector>
+    </div>
+    <div class="w-100">
+      <app-country-statistics></app-country-statistics>
+    </div>
+  </div>
+</div>
